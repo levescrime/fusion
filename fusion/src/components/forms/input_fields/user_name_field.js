@@ -39,7 +39,7 @@ const UserNameField = props => {
 
     return (
         <FieldContainer>
-            <FieldFrame  key={fieldLabel}>
+            <FieldFrame isError={isError && !isEmpty(value)} key={fieldLabel}>
                 <FormField isError={isError && !isEmpty(value)}>
                     <FieldLabel>
                         {fieldLabel}
@@ -55,7 +55,7 @@ const UserNameField = props => {
                     </FieldContent>
                 </FormField>
             </FieldFrame>
-            {isError && !isEmpty(value) && <ErrorMessage>user name invalid!</ErrorMessage>}
+            {isError && !isEmpty(value) && <ErrorMessage>User name invalid!</ErrorMessage>}
         </FieldContainer>
     )
 }

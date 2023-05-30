@@ -39,7 +39,7 @@ const ServerPathField = props => {
 
     return (
         <FieldContainer>
-            <FieldFrame key={fieldLabel}>
+            <FieldFrame isError={isError && !isEmpty(value)} key={fieldLabel}>
                 <FormField isError={isError && !isEmpty(value)}>
                     <FieldLabel>
                         {fieldLabel}

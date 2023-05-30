@@ -3,7 +3,7 @@ import theme from '../../../constants/theme';
 
 export const FieldFrame = styled('div')`
   display: flex;
-  margin-bottom: ${({isLast}) => isLast ? 0 : '12px'};
+  margin-bottom: ${({isError}) => isError ? 0 : '26px'};
   align-items: center;
 `
 
@@ -37,9 +37,9 @@ export const SubmitButton = styled('button')`
   align-self: center;
   font-weight: 600;
   border-radius: 16px;
+  margin-top: auto;
   width: 200px;
-  margin-bottom: 5px;
-  height: 5vh;
+  height: 30px;
   background-color:${({disabled}) => !disabled && '#3a87fc'};
   border:none;
   color:white;

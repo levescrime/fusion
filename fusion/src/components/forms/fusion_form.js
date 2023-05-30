@@ -14,7 +14,7 @@ import utils from '../../utils/utils'
 const FusionForm = props => {
     const ADVANCED = 'Advanced'
     const MANUAL = 'Manual'
-    const [formType, setFormType] = useState(ADVANCED);
+    const [formType, setFormType] = useState(MANUAL);
     const [isValid, setIsValid] = useState(false);
     const inputRef = useRef([]);
     const defaultData = {
