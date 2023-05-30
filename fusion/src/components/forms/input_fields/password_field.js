@@ -1,10 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
     FieldFrame,
     FormField,
     FieldLabel,
-    FieldContent,
-    FieldInput, ErrorMessage, FieldContainer
+    FieldInputContainer,
+    FieldInput, ErrorMessage, ColumnFlexContainer
 } from './form_components.styles';
 import utils from '../../../utils/utils'
 import {isEmpty} from "lodash";
@@ -15,12 +15,27 @@ const PasswordField = props => {
     const placeholder = "Required";
     const [value, setValue] = useState('');
     const [isError, setIsError] = useState(false);
+    const [isFocused, setIsFocused] = useState(false);
+
+    const inputRef = useRef(null);
+
+    useEffect(() => {
+        const handleFocus = () => {
+            setIsFocused(document.activeElement === inputRef.current);
+        };
+
+        document.addEventListener('focus', handleFocus, true);
+        return () => {
+            document.removeEventListener('focus', handleFocus, true);
+        };
+    }, []);
 
     useEffect(() => {
         setValue(formData.password)
     },[formData.password])
 
     const handleSubmit = () => {
+        setIsFocused(false)
         const newFormData = {...formData, password: value}
         setFormData(newFormData)
         if(utils.validatePassword(value)){
@@ -31,26 +46,27 @@ const PasswordField = props => {
     }
 
     return (
-        <FieldContainer>
+        <ColumnFlexContainer>
             <FieldFrame key={fieldLabel}>
-                <FormField isError={isError && !isEmpty(value)}>
+                <FormField isFocused={isFocused} isError={isError && !isEmpty(value)}>
                     <FieldLabel>
                         {fieldLabel}
                     </FieldLabel>
-                    <FieldContent>
+                    <FieldInputContainer>
                         <FieldInput
                             type={"password"}
+                            ref={inputRef}
                             id={fieldLabel}
                             placeholder={placeholder}
                             value={value}
                             onChange={(e) => setValue(e.target.value)}
                             onBlur={handleSubmit}
                         />
-                    </FieldContent>
+                    </FieldInputContainer>
                 </FormField>
             </FieldFrame>
             {isError && !isEmpty(value) && <ErrorMessage>password invalid!</ErrorMessage>}
-        </FieldContainer>
+        </ColumnFlexContainer>
     )
 }
 

@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
     FieldFrame,
     FormField,
     FieldLabel,
-    FieldContent,
+    FieldInputContainer,
     FieldInput,
-    CheckboxContainer, TextContainer, CheckboxInput, FieldContainer, ErrorMessage
+    CheckboxContainer, TextContainer, CheckboxInput, ColumnFlexContainer, ErrorMessage
 } from './form_components.styles';
 import utils from '../../../utils/utils'
 import {isEmpty} from "lodash";
@@ -16,6 +16,20 @@ const PortField = props => {
     const [value, setValue] = useState('');
     const [isSSLChecked, setSSLChecked] = useState(false);
     const [isError, setIsError] = useState(false);
+    const [isFocused, setIsFocused] = useState(false);
+
+    const inputRef = useRef(null);
+
+    useEffect(() => {
+        const handleFocus = () => {
+            setIsFocused(document.activeElement === inputRef.current);
+        };
+
+        document.addEventListener('focus', handleFocus, true);
+        return () => {
+            document.removeEventListener('focus', handleFocus, true);
+        };
+    }, []);
 
     useEffect(() => {
         setValue(formData.port)
@@ -23,6 +37,7 @@ const PortField = props => {
     },[formData.port, formData.isSSL])
 
     const handleSubmit = () => {
+        setIsFocused(false)
         if(utils.validatePort(value)){
             setIsError(false)
             const newFormData = {...formData, port: value}
@@ -49,20 +64,21 @@ const PortField = props => {
     }
 
     return (
-        <FieldContainer>
+        <ColumnFlexContainer>
             <FieldFrame key={fieldLabel}>
-                <FormField isPortField={true} isError={isError && !isEmpty(value)}>
+                <FormField isFocused={isFocused} isPortField={true} isError={isError && !isEmpty(value)}>
                     <FieldLabel isPortField={true}>
                         {fieldLabel}
                     </FieldLabel>
-                    <FieldContent>
+                    <FieldInputContainer>
                         <FieldInput
+                            ref={inputRef}
                             type={"number"}
                             value={value}
                             onChange={handleInputChange}
                             onBlur={handleSubmit}
                         />
-                    </FieldContent>
+                    </FieldInputContainer>
                 </FormField>
                 <CheckboxContainer>
                     <TextContainer>
@@ -76,7 +92,7 @@ const PortField = props => {
                 </CheckboxContainer>
             </FieldFrame>
             {isError && !isEmpty(value) && <ErrorMessage>Port invalid!</ErrorMessage>}
-        </FieldContainer>
+        </ColumnFlexContainer>
     )
 }
 

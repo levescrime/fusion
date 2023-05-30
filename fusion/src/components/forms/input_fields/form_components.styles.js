@@ -7,7 +7,7 @@ export const FieldFrame = styled('div')`
   align-items: center;
 `
 
-export const FieldContainer = styled('div')`
+export const ColumnFlexContainer = styled('div')`
   display: flex;
   flex-direction: column;
 `
@@ -22,9 +22,9 @@ export const FormField = styled('div')`
     display: flex;
     align-items: center;
     width:  ${({isPortField}) => isPortField ? '50%' : "100%"};
-    border: 2px solid ${theme.colors.graier};
+    border:2px solid ${theme.colors.graier} ;
     box-sizing: border-box;
-    border-color: ${({isError}) => isError && `${theme.colors.chartsPink}`};
+    border-color: ${({isError, isFocused}) => isError ? `${theme.colors.chartsPink}` : isFocused ? '#3a87fc' : null};
     outline: none;
     font-size: 16px;
     ::placeholder {
@@ -62,7 +62,7 @@ export const FieldLabel = styled('label')`
     font-weight: 500;
 `;
 
-export const FieldContent = styled('div')`
+export const FieldInputContainer = styled('div')`
     position: relative;
     flex: 1;
     margin: 12px 18px;

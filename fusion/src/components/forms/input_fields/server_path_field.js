@@ -1,10 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
     FieldFrame,
     FormField,
     FieldLabel,
-    FieldContent,
-    FieldInput, FieldContainer, ErrorMessage,
+    FieldInputContainer,
+    FieldInput, ColumnFlexContainer, ErrorMessage,
 } from './form_components.styles';
 import utils from '../../../utils/utils'
 import {isEmpty} from "lodash";
@@ -16,12 +16,27 @@ const ServerPathField = props => {
     const placeholder = "/calendars/users/";
     const [value, setValue] = useState('');
     const [isError, setIsError] = useState(false);
+    const [isFocused, setIsFocused] = useState(false);
+
+    const inputRef = useRef(null);
+
+    useEffect(() => {
+        const handleFocus = () => {
+            setIsFocused(document.activeElement === inputRef.current);
+        };
+
+        document.addEventListener('focus', handleFocus, true);
+        return () => {
+            document.removeEventListener('focus', handleFocus, true);
+        };
+    }, []);
 
     useEffect(() => {
         setValue(formData.serverPath)
     },[formData.serverPath])
 
     const handleSubmit = () => {
+        setIsFocused(false)
         if(utils.validateServerPath(value)){
             setIsError(false)
             const newFormData = {...formData, serverPath: value}
@@ -38,24 +53,25 @@ const ServerPathField = props => {
     }
 
     return (
-        <FieldContainer>
+        <ColumnFlexContainer>
             <FieldFrame isError={isError && !isEmpty(value)} key={fieldLabel}>
-                <FormField isError={isError && !isEmpty(value)}>
+                <FormField isFocused={isFocused} isError={isError && !isEmpty(value)}>
                     <FieldLabel>
                         {fieldLabel}
                     </FieldLabel>
-                    <FieldContent>
+                    <FieldInputContainer>
                         <FieldInput
+                            ref={inputRef}
                             placeholder={placeholder}
                             value={value}
                             onChange={handleChange}
                             onBlur={handleSubmit}
                         />
-                    </FieldContent>
+                    </FieldInputContainer>
                 </FormField>
             </FieldFrame>
             {isError && !isEmpty(value) && <ErrorMessage>Server path invalid!</ErrorMessage>}
-        </FieldContainer>
+        </ColumnFlexContainer>
     )
 }
 

@@ -3,7 +3,7 @@ import {
     FieldFrame,
     FormField,
     FieldLabel,
-    FieldContent,
+    FieldInputContainer,
     FormType, UpArrow, DownArrow, BlueContainer
 } from './form_components.styles';
 const AccountTypeField = props => {
@@ -16,9 +16,9 @@ const AccountTypeField = props => {
                 <FieldLabel>
                     {fieldLabel}
                 </FieldLabel>
-                <FieldContent>
+                <FieldInputContainer>
                     <FormType>{formType}</FormType>
-                </FieldContent>
+                </FieldInputContainer>
                 <BlueContainer onClick={changeFormType}>
                     <UpArrow/>
                     <DownArrow/>

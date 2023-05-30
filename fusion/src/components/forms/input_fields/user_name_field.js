@@ -1,10 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
     FieldFrame,
     FormField,
     FieldLabel,
-    FieldContent,
-    FieldInput, FieldContainer, ErrorMessage
+    FieldInputContainer,
+    FieldInput, ColumnFlexContainer, ErrorMessage
 } from './form_components.styles';
 import utils from '../../../utils/utils'
 import {isEmpty} from "lodash";
@@ -16,13 +16,27 @@ const UserNameField = props => {
     const placeholder = "name@example.com";
     const [value, setValue] = useState("");
     const [isError, setIsError] = useState(false);
+    const [isFocused, setIsFocused] = useState(false);
 
+    const inputRef = useRef(null);
+
+    useEffect(() => {
+        const handleFocus = () => {
+            setIsFocused(document.activeElement === inputRef.current);
+        };
+
+        document.addEventListener('focus', handleFocus, true);
+        return () => {
+            document.removeEventListener('focus', handleFocus, true);
+        };
+    }, []);
 
     useEffect(() => {
         setValue(formData.userName)
     },[formData.userName])
 
     const handleSubmit = () => {
+        setIsFocused(false)
         const newFormData  = {...formData, userName: value}
         setFormData(newFormData)
         if(utils.validateEmail(value)){
@@ -38,25 +52,26 @@ const UserNameField = props => {
     }
 
     return (
-        <FieldContainer>
+        <ColumnFlexContainer>
             <FieldFrame isError={isError && !isEmpty(value)} key={fieldLabel}>
-                <FormField isError={isError && !isEmpty(value)}>
+                <FormField   isFocused={isFocused} isError={isError && !isEmpty(value)}>
                     <FieldLabel>
                         {fieldLabel}
                     </FieldLabel>
-                    <FieldContent>
+                    <FieldInputContainer>
                         <FieldInput
+                            ref={inputRef}
                             type={"email"}
                             placeholder={placeholder}
                             value={value}
                             onChange={handleChange}
                             onBlur={handleSubmit}
                         />
-                    </FieldContent>
+                    </FieldInputContainer>
                 </FormField>
             </FieldFrame>
             {isError && !isEmpty(value) && <ErrorMessage>User name invalid!</ErrorMessage>}
-        </FieldContainer>
+        </ColumnFlexContainer>
     )
 }
 
