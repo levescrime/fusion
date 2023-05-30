@@ -33,9 +33,7 @@ const ServerPathField = props => {
 
     const handleChange = (e) => {
         const val = e.target.value;
-        if(isEmpty(val)){
-            setIsError(false)
-        }
+        setIsError(false)
         setValue(val)
     }
 
