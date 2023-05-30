@@ -33,8 +33,6 @@ const siteThemes = {
         idle: '#FF9933',
         operating: '#4db6ac',
         off: '#630a6b',
-        necessaryIdle: '#f9caa3',
-        necessaryText: '#C35F47',
         darkPink: '#c61a51',
         negativeTrend: '#ff7a6e',
         strongRed: '#990000',

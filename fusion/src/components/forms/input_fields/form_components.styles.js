@@ -3,13 +3,13 @@ import theme from '../../../constants/theme';
 
 export const FieldFrame = styled('div')`
   display: flex;
-    margin-bottom: ${({isLast}) => isLast ? 0 : '12px'};
+  margin-bottom: ${({isLast}) => isLast ? 0 : '12px'};
   align-items: center;
 `
 
 export const FieldContainer = styled('div')`
   display: flex;
-flex-direction: column;
+  flex-direction: column;
 `
 
 export const ErrorMessage = styled('div')`
@@ -75,14 +75,14 @@ export const FieldContent = styled('div')`
 `;
 
 export const CheckboxContainer = styled('div')`
-    display: flex;
+  display: flex;
   margin-left: auto;
   padding: 5px;
   cursor: pointer;
 `;
 
 export const TextContainer = styled('div')`
-margin-right: 5px;
+  margin-right: 5px;
   white-space: nowrap;
 `;
 

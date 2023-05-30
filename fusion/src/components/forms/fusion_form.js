@@ -68,7 +68,7 @@ const FusionForm = props => {
 
     return (
         <PageContainer>
-            <FormContainer>
+            <FormContainer isExpanded={formType === ADVANCED}>
                 <AccountInputField formType={formType} changeFormType={handleAccountTypeChange}/>
                 <UserNameField
                     formData={formData}
