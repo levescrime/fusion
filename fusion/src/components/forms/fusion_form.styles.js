@@ -4,7 +4,7 @@ export const FormContainer = styled('div')`
 align-self: center;
   padding: 10px;
   width: 600px;
-  height: ${({isExpanded}) => isExpanded ? '495px' : '340px'};
+  height: ${({isExpanded}) => isExpanded ? '495px' : '345px'};
   display: flex;
   background-color: white;
   flex-direction: column;
