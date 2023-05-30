@@ -1,9 +1,7 @@
 import styled from '@emotion/styled';
 
 export const FormContainer = styled('div')`
-  position: absolute;
-  top: 20%;
-  left: 27%;
+align-self: center;
   width: 600px;
   display: flex;
   background-color: white;
@@ -12,6 +10,7 @@ export const FormContainer = styled('div')`
 
 export const PageContainer = styled('div')`
   display: flex;
+  justify-content: center;
   flex-direction: column;
   position: absolute;
   width: 100%;
