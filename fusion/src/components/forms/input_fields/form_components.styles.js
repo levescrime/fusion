@@ -95,18 +95,18 @@ export const FormType = styled('div')`
 export const UpArrow = styled('div')`
   width: 0;
   height: 0;
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  border-bottom: 6px solid white;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid white;
 
 `;
 export const DownArrow = styled('div')`
   width: 0;
   height: 0;
   margin-top: 5px;
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  border-top: 6px solid white;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid white;
 
 `;
 export const BlueContainer = styled('div')`
@@ -115,8 +115,8 @@ export const BlueContainer = styled('div')`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 30px;
-  height: 30px;
+  width: 24px;
+  height: 24px;
   background-color: #3a87fc;
   border-radius: 10px;
 cursor: pointer;
