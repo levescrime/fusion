@@ -18,7 +18,6 @@ const UserNameField = props => {
     const [isError, setIsError] = useState(false);
 
     useEffect(() => {
-        debugger
         setValue(formData.userName)
     },[formData.userName])
 
